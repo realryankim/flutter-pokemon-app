@@ -1,4 +1,5 @@
 🔴 Flutter Pokemon App
+> https://www.youtube.com/watch?v=yeXJqZCiwTQ&t=1s
 
 * Flutter
 * Getx
