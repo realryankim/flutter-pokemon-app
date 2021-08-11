@@ -20,9 +20,47 @@ class Home extends StatelessWidget {
         centerTitle: true,
       ),
       drawer: Drawer(),
-      body: Center(
-        child: Text('Hello from Pokemon App'),
-      ),
+      body: controller.pokemon.value.pokemon == null
+          ? Center(child: CircularProgressIndicator())
+          : Obx(
+              () => GridView.count(
+                crossAxisCount: 2,
+                children: controller.pokemon.value.pokemon
+                    .map(
+                      (poke) => Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: InkWell(
+                          onTap: () {},
+                          child: Card(
+                            elevation: 3.0,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  height: 100.0,
+                                  width: 100.0,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(poke.img),
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  poke.name,
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(Icons.refresh),

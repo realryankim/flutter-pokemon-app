@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+Pokemon pokemonFromJson(String str) => Pokemon.fromJson(json.decode(str));
+
+String pokemonToJson(Pokemon data) => json.encode(data.toJson());
+
 class Pokemon {
   Pokemon({
     required this.pokemon,
@@ -44,10 +50,10 @@ class PokemonElement {
   String height;
   String weight;
   String candy;
-  int candyCount;
+  String? candyCount;
   Egg egg;
-  double spawnChance;
-  double avgSpawns;
+  String spawnChance;
+  String avgSpawns;
   String spawnTime;
   List<double>? multipliers;
   List<Type> weaknesses;
@@ -63,10 +69,11 @@ class PokemonElement {
         height: json["height"],
         weight: json["weight"],
         candy: json["candy"],
-        candyCount: json["candy_count"] == null ? null : json["candy_count"],
+        candyCount:
+            json["candy_count"] == null ? null : json["candy_count"].toString(),
         egg: eggValues.map[json["egg"]]!,
-        spawnChance: json["spawn_chance"].toDouble(),
-        avgSpawns: json["avg_spawns"].toDouble(),
+        spawnChance: json["spawn_chance"].toString(),
+        avgSpawns: json["avg_spawns"].toString(),
         spawnTime: json["spawn_time"],
         multipliers: json["multipliers"] == null
             ? null
