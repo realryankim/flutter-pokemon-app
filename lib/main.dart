@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.cyan,
         accentColor: Colors.cyan[600],
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        primaryTextTheme: TextTheme(
+          headline6: TextStyle(color: Colors.white),
+        ),
       ),
       initialBinding: InitBinding(),
       initialRoute: '/',
