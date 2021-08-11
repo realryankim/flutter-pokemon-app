@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pokemon_app/src/binding/init_binding.dart';
+import 'package:flutter_pokemon_app/src/home.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -10,11 +12,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Pokemon App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryIconTheme: IconThemeData(color: Colors.white),
+        primarySwatch: Colors.cyan,
+        accentColor: Colors.cyan[600],
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Container(),
+      initialBinding: InitBinding(),
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => Home()),
+      ],
     );
   }
 }
