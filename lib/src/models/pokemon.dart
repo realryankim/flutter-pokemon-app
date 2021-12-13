@@ -1,9 +1,3 @@
-import 'dart:convert';
-
-Pokemon pokemonFromJson(String str) => Pokemon.fromJson(json.decode(str));
-
-String pokemonToJson(Pokemon data) => json.encode(data.toJson());
-
 class Pokemon {
   Pokemon({
     required this.pokemon,

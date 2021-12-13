@@ -8,7 +8,7 @@ class PokemonDetail extends StatelessWidget {
   late double height;
   late double width;
 
-  Widget getBody() {
+  Widget _detail() {
     height = Get.height;
     width = Get.width;
     return Stack(
@@ -75,13 +75,17 @@ class PokemonDetail extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: pokemon.nextEvolution == null
-                      ? [Text('Last evolution in the 1st generation')]
+                      ? [
+                          Text('Last evolution in the 1st generation'),
+                        ]
                       : pokemon.nextEvolution!
                           .map((next) => FilterChip(
                                 backgroundColor: Colors.green,
                                 label: Text(
                                   next.name,
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 onSelected: (bool) {},
                               ))
@@ -96,7 +100,7 @@ class PokemonDetail extends StatelessWidget {
           child: Hero(
             tag: pokemon.img,
             child: Container(
-              height: 200,
+              height: 200.0,
               width: 200.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -120,7 +124,7 @@ class PokemonDetail extends StatelessWidget {
         elevation: 0,
         title: Text(pokemon.name),
       ),
-      body: getBody(),
+      body: _detail(),
     );
   }
 }

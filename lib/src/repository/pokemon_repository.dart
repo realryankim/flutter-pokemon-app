@@ -7,21 +7,22 @@ class PokemonRepository extends GetConnect {
 
   @override
   void onInit() {
-    httpClient.baseUrl = 'https://raw.githubusercontent.com';
+    httpClient.baseUrl = 'https://raw.githubusercontent.com/';
     super.onInit();
   }
 
   Future<Pokemon?> loadPokemons() async {
-    String url = '/Biuni/PokemonGO-Pokedex/master/pokedex.json';
+    String url = 'Biuni/PokemonGO-Pokedex/master/pokedex.json';
     final response = await get(url);
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
+      // jsonDecode: Parses the string and returns the resulting Json object.
       var decodedJson = jsonDecode(response.body);
       if (decodedJson != null && decodedJson.length > 0) {
         return Pokemon.fromJson(decodedJson);
       }
-      print(decodedJson.length);
+      // print(decodedJson.length);
     }
   }
 }

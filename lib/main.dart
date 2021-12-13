@@ -16,7 +16,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryIconTheme: IconThemeData(color: Colors.white),
         primarySwatch: Colors.cyan,
-        accentColor: Colors.cyan[600],
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: Colors.cyan[600],
+          secondary: Colors.cyan[600],
+        ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primaryTextTheme: TextTheme(
           headline6: TextStyle(color: Colors.white),

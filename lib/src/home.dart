@@ -3,28 +3,27 @@ import 'package:flutter_pokemon_app/src/controller/home_controller.dart';
 import 'package:flutter_pokemon_app/src/pokomon_detail.dart';
 import 'package:get/get.dart';
 
-class Home extends StatelessWidget {
+class Home extends GetView<HomeController> {
   Home({Key? key}) : super(key: key);
-
-  final HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Pokemon App",
-          style: TextStyle(
-            color: Colors.white,
+    return Obx(
+      () => Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "Pokemon App",
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      drawer: Drawer(),
-      body: controller.pokemon.value.pokemon == null
-          ? Center(child: CircularProgressIndicator())
-          : Obx(
-              () => GridView.count(
+        drawer: Drawer(),
+        body: controller.pokemon.value.pokemon == null
+            ? Center(child: CircularProgressIndicator())
+            : GridView.count(
+                controller: controller.scrollController,
                 crossAxisCount: 2,
                 children: controller.pokemon.value.pokemon
                     .map(
@@ -33,7 +32,7 @@ class Home extends StatelessWidget {
                         child: InkWell(
                           onTap: () {
                             Get.to(
-                              PokemonDetail(
+                              () => PokemonDetail(
                                 pokemon: poke,
                               ),
                             );
@@ -71,10 +70,14 @@ class Home extends StatelessWidget {
                     )
                     .toList(),
               ),
-            ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.refresh),
+        floatingActionButton: controller.showBackToTopButton.value == false
+            ? null
+            : FloatingActionButton(
+                onPressed: () {
+                  controller.scrollToTop();
+                },
+                child: Icon(Icons.arrow_upward),
+              ),
       ),
     );
   }
